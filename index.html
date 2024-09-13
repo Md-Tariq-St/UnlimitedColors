@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Page title</title>
+</head>
+<style>
+    *{
+        padding:0;
+        margin:0;
+        box-sizing:border-box;
+    }
+      body{
+           font-family: 'Arial', sans-serif;
+           background-color: #f0f4f8;
+    }
+    .div{
+        display:flex;
+        flex-wrap:wrap;
+        
+    }
+     
+    button {
+    padding: 12px 40px;
+    background-color: #085c8c;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+    button:hover {
+    background-color: #0573a8;
+    transform: scale(1.05);
+}
+    .btn-box{
+        background-color:#085c8c;
+        text-align:center; 
+        margin-bottom:0px; 
+        padding:5px; 
+        
+    }
+   .box{
+       width:45px;
+       height:45px;
+       text-align:center;
+       font-size:5px;
+       border-radius: px;
+       cursor: pointer;
+       transition: transform 0.3s ease, background-color 0.3s ease;
+
+      }
+      
+    .box:hover {
+        transform: scale(1.1);
+        background-color: #ff6347;
+      }
+      
+    .box span{
+         display:none;
+     }
+  
+   
+   .div{
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        gap:8px;
+      }
+   .text{
+       color:#fff;
+       padding-top:4px;
+   }
+   .copy-notifi{
+       text-align:center;
+       font-size:23px;
+       font-weight:600;
+       display:none;
+   }
+</style>
+<body>
+  <div class="btn-box">
+    <button id="b1">Stop</button>
+    <button id="b2">Start</button>
+    <div class="text"></div>
+  </div>
+   <div class="copy-notifi">
+       Click any color box to copy the hex!
+   </div>
+    <div class="div">
+        
+    </div>
+    
+    <script>
+        
+       let b1 = document.querySelector("#b1");
+       let b3 = document.querySelector("#b2");
+       let div = document.querySelector(".div");
+       let body = document.querySelector("body");
+       let haxText = document.querySelector(".text");
+       let copy_notifi = document.querySelector(".copy-notifi");
+       let stop;
+       
+      const randColor = ()=>{
+          const hax = "0123456789abcdef"
+          let color="#"
+          for(let i=0;i<6;i++){
+          color=color+hax[Math.floor(Math.random()*16)]
+           };
+         return color
+      };
+       
+       
+      const randomColor = (e)=>{
+          HaxColor = randColor()
+          box = document.createElement("div")
+          box.classList.add("box")
+          box.style.backgroundColor=HaxColor;
+          box.innerHTML=`<span>${HaxColor}</span>`
+          div.appendChild(box)
+         // body.style.backgroundColor=HaxColor;
+          haxText.innerText=`HaxCode :-${HaxColor}`
+       };
+        
+      b1.addEventListener("click",()=>{
+         clearInterval(stop)
+         stop = null;
+      });
+      
+      b2.addEventListener("click",()=>{
+      if(!stop){
+         stop = setInterval(randomColor,200,)
+         };
+         copy_notifi.style.display="block";
+      });
+      
+     div.addEventListener("click",(e)=>{
+         textHaxCode = e.target.textContent
+         navigator.clipboard.writeText(textHaxCode);
+         alert(`Hex Code ${textHaxCode} is Copied!`);
+     });
+     
+    </script>
+</body>
+</html>
